@@ -1,0 +1,12 @@
+version: '3.9'
+services:
+  rent-db:
+    container_name: rent_db
+    restart: always
+    image: 'postgres'
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin_user
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: rent_db
