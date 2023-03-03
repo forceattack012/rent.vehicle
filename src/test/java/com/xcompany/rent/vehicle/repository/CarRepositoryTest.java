@@ -2,25 +2,24 @@ package com.xcompany.rent.vehicle.repository;
 
 import com.xcompany.rent.vehicle.entity.Car;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.ArrayList;
-import java.util.List;
+import static org.junit.jupiter.api.Assertions.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
+@ExtendWith(SpringExtension.class)
 @DataJpaTest
-public class CarRepositoryTests {
+public class CarRepositoryTest {
     @Autowired
     private TestEntityManager entityManager;
     @Autowired
     private CarRepository carRepository;
 
     @Test
-    public void WhenCreatedCarShouldGetId(){
+    public void whenCreatedCarShouldGetId(){
         Car car = new Car();
         car.setPrice(1000);
         car.setName("test");
@@ -40,5 +39,17 @@ public class CarRepositoryTests {
         Car car = carRepository.findById(newCar.getId()).get();
         assertEquals(newCar.getName(), car.getName());
         assertEquals(newCar.getPrice(), car.getPrice());
+    }
+
+    @Test
+    public void shouldDeleteCarById(){
+        entityManager.persist(new Car("test", 200));
+        entityManager.persist(new Car("test2", 20001));
+        long id = 1L;
+
+        carRepository.deleteById(id);
+        var car = carRepository.findById(id);
+
+        assertTrue(car.isEmpty());
     }
 }

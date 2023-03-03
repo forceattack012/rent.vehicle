@@ -19,14 +19,14 @@ public class Application implements CommandLineRunner {
 	}
 
 	private static Logger logger = Logger.getLogger(Application.class.getName());
-	@Autowired
-	private RentalCarRepository rentalCarRepository;
-	@Autowired
-	private CustomerRepository customerRepository;
-	@Autowired
-	private DriverRepository driverRepository;
-	@Autowired
-	private CarRepository carRepository;
+//	@Autowired
+//	private RentalCarRepository rentalCarRepository;
+//	@Autowired
+//	private CustomerRepository customerRepository;
+//	@Autowired
+//	private DriverRepository driverRepository;
+//	@Autowired
+//	private CarRepository carRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
