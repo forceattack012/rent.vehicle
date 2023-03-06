@@ -14,4 +14,6 @@ public abstract class Vehicle {
     private String name;
     @Column(name="price")
     private double price;
+    @Column(name="is_used")
+    private boolean isUsed;
 }

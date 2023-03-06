@@ -10,3 +10,28 @@ services:
       POSTGRES_USER: admin_user
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: rent_db
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:20.0.5
+    ports:
+      - "8080:8080"
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    command: start-dev
+
+
+  rent-api:
+    container_name: rent_api
+    restart: always
+    image: ${DOCKER_REGISTRY-}rent_api
+    build:
+      dockerfile: dockerfile
+    depends_on:
+      - rent-db
+    ports:
+      - "8081:8081"
+    environment:
+      - spring.datasource.url=jdbc:postgresql://rent-db:5432/rent_db
+      - spring.datasource.username=admin_user
+      - spring.datasource.password=admin

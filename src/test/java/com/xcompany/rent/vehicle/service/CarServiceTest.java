@@ -29,20 +29,12 @@ public class CarServiceTest {
     }
 
     @Test
-    public void shouldFindCarById() {
-        Car newCar = new Car("test1", 10000);
+    public void shouldFindCarById() throws Exception {
+        Car newCar = new Car("test1", 10000, true);
         long id = 1;
         given(carRepository.findById(id)).willReturn(Optional.of(newCar));
 
         Car car = carService.findAllVehicleById(id);
         assertThat(car).isNotNull();
-    }
-
-    @Test
-    public void ShouldFindcarNotFoundException() throws NotFoundException {
-        long id = 2;
-        Car car = new Car( "test",1000);
-        given(carRepository.findById(id)).willReturn(Optional.ofNullable(null));
-
     }
 }

@@ -1,9 +1,14 @@
 package com.xcompany.rent.vehicle.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Setter
 @Getter
@@ -16,7 +21,7 @@ public class Car extends Vehicle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    public Car(String name, double price){
-        super(name, price);
+    public Car(String name, double price, boolean isUsed){
+        super(name, price, isUsed);
     }
 }
